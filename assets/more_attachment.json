@@ -1,0 +1,31 @@
+{
+    "parent_attachment": [
+        {
+            "path": "/uploads/attachments/example.pdf"
+        },
+        {
+            "path": "/uploads/attachments/example1.pdf"
+        }
+    ],
+    "child_attachment": [
+        {
+            "lot_no": "1",
+            "attachment": [
+                {
+                    "path": "/uploads/attachments/example2.pdf"
+                },
+                {
+                    "path": "/uploads/attachments/example3.pdf"
+                }
+            ]
+        },
+        {
+            "lot_no": "2",
+            "attachment": [
+                {
+                    "path": "/uploads/attachments/example4.pdf"
+                }
+            ]
+        }
+    ]
+}

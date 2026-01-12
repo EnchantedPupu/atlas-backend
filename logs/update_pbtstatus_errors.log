@@ -1,0 +1,198 @@
+[03-Jun-2025 09:07:18 Europe/Berlin] === UPDATE PBTSTATUS DEBUG START ===
+[03-Jun-2025 09:07:18 Europe/Berlin] POST data: Array
+(
+    [job_id] => 6
+    [pbtstatus] => acquisition_complete
+)
+
+[03-Jun-2025 09:07:18 Europe/Berlin] Session data: Array
+(
+    [user_logged_in] => 1
+    [user_id] => 9
+    [user_name] => VO2
+    [user_role] => VO
+    [username] => test_vo2
+    [profile_picture] => 
+)
+
+[03-Jun-2025 09:07:18 Europe/Berlin] User ID: 9, User Role: VO
+[03-Jun-2025 09:15:03 Europe/Berlin] === UPDATE PBTSTATUS DEBUG START ===
+[03-Jun-2025 09:15:03 Europe/Berlin] POST data: Array
+(
+    [job_id] => 3
+    [pbtstatus] => acquisition_complete
+)
+
+[03-Jun-2025 09:15:03 Europe/Berlin] Session data: Array
+(
+    [user_logged_in] => 1
+    [user_id] => 2
+    [user_name] => Test VO
+    [user_role] => VO
+    [username] => test_vo
+    [profile_picture] => uploads/profile_pictures/683c0296baa7f.png
+)
+
+[03-Jun-2025 09:15:03 Europe/Berlin] User ID: 2, User Role: VO
+[03-Jun-2025 09:15:14 Europe/Berlin] === UPDATE PBTSTATUS DEBUG START ===
+[03-Jun-2025 09:15:14 Europe/Berlin] POST data: Array
+(
+    [job_id] => 4
+    [pbtstatus] => acquisition_complete
+)
+
+[03-Jun-2025 09:15:14 Europe/Berlin] Session data: Array
+(
+    [user_logged_in] => 1
+    [user_id] => 2
+    [user_name] => Test VO
+    [user_role] => VO
+    [username] => test_vo
+    [profile_picture] => uploads/profile_pictures/683c0296baa7f.png
+)
+
+[03-Jun-2025 09:15:14 Europe/Berlin] User ID: 2, User Role: VO
+[12-Jun-2025 15:03:30 Europe/Berlin] === UPDATE PBTSTATUS DEBUG START ===
+[12-Jun-2025 15:03:30 Europe/Berlin] POST data: Array
+(
+    [job_id] => 7
+    [pbtstatus] => acquisition_complete
+)
+
+[12-Jun-2025 15:03:30 Europe/Berlin] Session data: Array
+(
+    [user_logged_in] => 1
+    [user_id] => 2
+    [user_name] => Test VO
+    [user_role] => VO
+    [username] => test_vo
+    [profile_picture] => uploads/profile_pictures/683c0296baa7f.png
+)
+
+[12-Jun-2025 15:03:30 Europe/Berlin] User ID: 2, User Role: VO
+[14-Jun-2025 19:16:04 Europe/Berlin] === UPDATE PBTSTATUS DEBUG START ===
+[14-Jun-2025 19:16:04 Europe/Berlin] POST data: Array
+(
+    [job_id] => 5
+    [pbtstatus] => acquisition_complete
+)
+
+[14-Jun-2025 19:16:04 Europe/Berlin] Session data: Array
+(
+    [user_logged_in] => 1
+    [user_id] => 2
+    [user_name] => Test VO
+    [user_role] => VO
+    [username] => test_vo
+    [profile_picture] => uploads/profile_pictures/683c0296baa7f.png
+)
+
+[14-Jun-2025 19:16:04 Europe/Berlin] User ID: 2, User Role: VO
+[30-Jun-2025 10:07:01 Europe/Berlin] === UPDATE PBTSTATUS DEBUG START ===
+[30-Jun-2025 10:07:01 Europe/Berlin] POST data: Array
+(
+    [job_id] => 8
+    [pbtstatus] => acquisition_complete
+)
+
+[30-Jun-2025 10:07:01 Europe/Berlin] Session data: Array
+(
+    [user_logged_in] => 1
+    [user_id] => 2
+    [user_name] => Test VO
+    [user_role] => VO
+    [username] => test_vo
+    [profile_picture] => uploads/profile_pictures/683c0296baa7f.png
+)
+
+[30-Jun-2025 10:07:01 Europe/Berlin] User ID: 2, User Role: VO
+[14-Jul-2025 20:57:50 Europe/Berlin] === UPDATE PBTSTATUS DEBUG START ===
+[14-Jul-2025 20:57:50 Europe/Berlin] POST data: Array
+(
+    [job_id] => 10
+    [pbtstatus] => acquisition_complete
+)
+
+[14-Jul-2025 20:57:50 Europe/Berlin] Session data: Array
+(
+    [user_logged_in] => 1
+    [user_id] => 2
+    [user_name] => Test VO
+    [user_role] => VO
+    [username] => test_vo
+    [profile_picture] => uploads/profile_pictures/683c0296baa7f.png
+)
+
+[14-Jul-2025 20:57:50 Europe/Berlin] User ID: 2, User Role: VO
+[27-Jul-2025 23:02:47 Europe/Berlin] === UPDATE PBTSTATUS DEBUG START ===
+[27-Jul-2025 23:02:47 Europe/Berlin] POST data: Array
+(
+    [job_id] => 23
+    [pbtstatus] => acquisition_complete
+)
+
+[27-Jul-2025 23:02:47 Europe/Berlin] Session data: Array
+(
+    [user_logged_in] => 1
+    [user_id] => 2
+    [user_name] => Nurzilla Bt Mohamad
+    [user_role] => VO
+    [username] => Nurzilla
+    [profile_picture] => uploads/profile_pictures/68778bcbde293.png
+)
+
+[27-Jul-2025 23:02:47 Europe/Berlin] User ID: 2, User Role: VO
+[27-Jul-2025 23:03:01 Europe/Berlin] === UPDATE PBTSTATUS DEBUG START ===
+[27-Jul-2025 23:03:01 Europe/Berlin] POST data: Array
+(
+    [job_id] => 22
+    [pbtstatus] => acquisition_complete
+)
+
+[27-Jul-2025 23:03:01 Europe/Berlin] Session data: Array
+(
+    [user_logged_in] => 1
+    [user_id] => 2
+    [user_name] => Nurzilla Bt Mohamad
+    [user_role] => VO
+    [username] => Nurzilla
+    [profile_picture] => uploads/profile_pictures/68778bcbde293.png
+)
+
+[27-Jul-2025 23:03:01 Europe/Berlin] User ID: 2, User Role: VO
+[27-Jul-2025 23:03:08 Europe/Berlin] === UPDATE PBTSTATUS DEBUG START ===
+[27-Jul-2025 23:03:08 Europe/Berlin] POST data: Array
+(
+    [job_id] => 20
+    [pbtstatus] => acquisition_complete
+)
+
+[27-Jul-2025 23:03:08 Europe/Berlin] Session data: Array
+(
+    [user_logged_in] => 1
+    [user_id] => 2
+    [user_name] => Nurzilla Bt Mohamad
+    [user_role] => VO
+    [username] => Nurzilla
+    [profile_picture] => uploads/profile_pictures/68778bcbde293.png
+)
+
+[27-Jul-2025 23:03:08 Europe/Berlin] User ID: 2, User Role: VO
+[27-Jul-2025 23:03:15 Europe/Berlin] === UPDATE PBTSTATUS DEBUG START ===
+[27-Jul-2025 23:03:15 Europe/Berlin] POST data: Array
+(
+    [job_id] => 21
+    [pbtstatus] => acquisition_complete
+)
+
+[27-Jul-2025 23:03:15 Europe/Berlin] Session data: Array
+(
+    [user_logged_in] => 1
+    [user_id] => 2
+    [user_name] => Nurzilla Bt Mohamad
+    [user_role] => VO
+    [username] => Nurzilla
+    [profile_picture] => uploads/profile_pictures/68778bcbde293.png
+)
+
+[27-Jul-2025 23:03:15 Europe/Berlin] User ID: 2, User Role: VO

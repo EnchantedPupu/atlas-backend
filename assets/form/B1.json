@@ -1,0 +1,68 @@
+{
+  "form_type": "",
+  "form": "Tanah HakMilik",
+  "form_id": "B1",
+  "tanah": {
+    "lot_no": "",
+    "sj_no": "",
+    "luas": ""
+  },
+  "penuntut": {
+    "nama": "",
+    "no_kp": "",
+    "alamat": "",
+    "tarikh_lahir": "",
+    "jantina": "",
+    "bangsa": "",
+    "tel": ""
+  },
+  "kebun": {
+    "jenis_kebun": "",
+    "anggaran_keluasan": "",
+    "umur": "",
+    "berbuah": false,
+    "keadaan": "",
+    "penjagaan": false,
+    "catatan": ""
+  },
+  "faktor_penilaian": {
+    "berbuah": false,
+    "keadaan": "",
+    "penjagaan": false
+  },
+  "tanaman_lain": [
+    {
+      "jenis_tanaman": "",
+      "bilangan_ditanam": "",
+      "umur": "",
+      "berbuah": false,
+      "keadaan": "",
+      "penjagaan": false,
+      "catatan": ""
+    }
+  ],
+  "pengesahan_penuntut": {
+    "bersetuju": true,
+    "nama": "",
+    "tarikh": "",
+    "tandatangan": ""
+  },
+  "lakaran": {
+    "lakaran_field_lot": "",
+    "catatan": ""
+  },
+  "pengesahan_pengukur": {
+    "dicatat_oleh": {
+      "nama": "",
+      "jawatan": "",
+      "tandatangan": "",
+      "tarikh": ""
+    },
+    "disemak_oleh": {
+      "nama": "",
+      "jawatan": "",
+      "tandatangan": "",
+      "tarikh": ""
+    }
+  }
+}

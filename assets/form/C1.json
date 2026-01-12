@@ -1,0 +1,63 @@
+{
+  "form_type": "",
+  "form": "Laporan Kolam Ikan, Bangunan & Lain-Lain",
+  "form_id": "C1",
+  "tanah": {
+    "lot_no": "",
+    "sj_no": ""
+  },
+  "penuntut": {
+    "nama": "",
+    "no_kp": "",
+    "alamat": "",
+    "tarikh_lahir": "",
+    "jantina": "",
+    "bangsa": "",
+    "tel": ""
+  },
+  "kolam_ikan": [
+    {
+      "jenis_kolam": "",
+      "anggaran_keluasan": "",
+      "keadaan": "",
+      "penjagaan": false,
+      "penilaian_keadaan": "",
+      "penilaian_penjagaan": "",
+      "catatan": ""
+    }
+  ],
+  "bangunan": [
+    {
+      "jenis_bangunan": "",
+      "umur": "",
+      "dimensi": "",
+      "keadaan": "",
+      "anggaran_kos": "",
+      "tiang": "",
+      "lantai": "",
+      "dinding": "",
+      "atap": "",
+      "tingkap": "",
+      "siling": "",
+      "catatan": ""
+    }
+  ],
+  "lakaran": {
+      "lakaran_dimensi_struktur": "",
+      "catatan": ""
+  },
+  "pengesahan": {
+    "direkod_oleh": {
+      "nama": "",
+      "jawatan": "",
+      "tandatangan": "",
+      "tarikh": ""
+    },
+    "disemak_oleh": {
+      "nama": "",
+      "jawatan": "",
+      "tandatangan": "",
+      "tarikh": ""
+    }
+  }
+}

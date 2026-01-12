@@ -1,0 +1,734 @@
+/* Forms Display Styles - Hierarchical categorization by form_type and lot_no */
+
+/* Main container for categorized forms */
+.categorized-forms {
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* Forms summary header */
+.forms-summary-header {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border: 1px solid #dee2e6;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 25px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.forms-summary-header h4 {
+    color: #2c3e50;
+    margin: 0 0 8px 0;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.forms-summary-header p {
+    color: #6c757d;
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+/* Form category styling */
+.form-category {
+    background: #ffffff;
+    border: 2px solid #e9ecef;
+    border-radius: 15px;
+    margin-bottom: 25px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+}
+
+.form-category:hover {
+    border-color: #007bff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,123,255,0.15);
+}
+
+/* Category header */
+.category-header {
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 3px solid #004085;
+}
+
+.category-title {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex: 1;
+}
+
+.category-icon {
+    font-size: 2rem;
+    background: rgba(255,255,255,0.2);
+    padding: 10px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 60px;
+    height: 60px;
+}
+
+.category-info h5 {
+    margin: 0 0 5px 0;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: white;
+}
+
+.category-info p {
+    margin: 0;
+    opacity: 0.9;
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.9);
+}
+
+.category-count {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+}
+
+.count-badge {
+    background: rgba(255,255,255,0.25);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border: 1px solid rgba(255,255,255,0.3);
+}
+
+.lot-count {
+    background: rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.9);
+    padding: 4px 10px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+/* Category lots container */
+.category-lots {
+    padding: 0;
+}
+
+/* Lot group styling */
+.lot-group {
+    border-bottom: 1px solid #f1f3f4;
+    transition: background-color 0.3s ease;
+}
+
+.lot-group:last-child {
+    border-bottom: none;
+}
+
+.lot-group:hover {
+    background-color: #f8f9fa;
+}
+
+/* Lot header */
+.lot-header {
+    background: #f8f9fa;
+    border-left: 4px solid #28a745;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.lot-header:hover {
+    background: #e9ecef;
+    border-left-color: #20c997;
+}
+
+.lot-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+}
+
+.lot-icon {
+    font-size: 1.3rem;
+    color: #28a745;
+    background: rgba(40, 167, 69, 0.1);
+    padding: 8px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    height: 40px;
+}
+
+.lot-info h6 {
+    margin: 0 0 3px 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.lot-info p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: #6c757d;
+}
+
+/* Lot toggle button */
+.btn-toggle-lot {
+    background: #28a745;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.btn-toggle-lot:hover {
+    background: #218838;
+    transform: scale(1.05);
+}
+
+.btn-toggle-lot.expanded {
+    background: #dc3545;
+}
+
+.btn-toggle-lot.expanded:hover {
+    background: #c82333;
+}
+
+/* Lot forms container */
+.lot-forms {
+    padding: 20px;
+    background: #fdfdfd;
+    border-top: 1px solid #e9ecef;
+}
+
+/* Form card styling */
+.form-card {
+    background: white;
+    border: 1px solid #e9ecef;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.form-card:hover {
+    border-color: #007bff;
+    box-shadow: 0 4px 12px rgba(0,123,255,0.1);
+    transform: translateY(-1px);
+}
+
+.form-card:last-child {
+    margin-bottom: 0;
+}
+
+/* Form header */
+.form-header {
+    padding: 15px 20px;
+    background: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.form-title {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+}
+
+.form-title h6 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.form-type-badge {
+    background: #007bff;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    align-self: flex-start;
+    max-width: fit-content;
+}
+
+.form-date {
+    font-size: 0.85rem;
+    color: #6c757d;
+    font-weight: 500;
+}
+
+/* Form actions */
+.form-actions {
+    padding: 15px 20px;
+    background: white;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.btn-view-form, .btn-download-form {
+    background: #17a2b8;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.btn-view-form:hover {
+    background: #138496;
+    transform: scale(1.05);
+}
+
+.btn-download-form {
+    background: #28a745;
+}
+
+.btn-download-form:hover {
+    background: #218838;
+    transform: scale(1.05);
+}
+
+/* Form details (expanded view) */
+.form-details {
+    border-top: 2px solid #e9ecef;
+    background: #f8f9fa;
+}
+
+.form-details-content {
+    padding: 20px;
+}
+
+/* Form info header */
+.form-info-header {
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.form-info-header h6 {
+    margin: 0 0 10px 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.form-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.meta-item {
+    font-size: 0.9rem;
+    color: #495057;
+}
+
+/* Form content tabs */
+.form-content-tabs {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.tab-buttons {
+    display: flex;
+    background: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.tab-btn {
+    background: transparent;
+    border: none;
+    padding: 12px 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #6c757d;
+    transition: all 0.3s ease;
+    border-bottom: 3px solid transparent;
+    flex: 1;
+}
+
+.tab-btn:hover {
+    background: #e9ecef;
+    color: #495057;
+}
+
+.tab-btn.active {
+    background: white;
+    color: #007bff;
+    border-bottom-color: #007bff;
+}
+
+.tab-content {
+    padding: 20px;
+    background: white;
+}
+
+/* Form sections styling */
+.form-sections {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-section {
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.form-section h6 {
+    margin: 0 0 15px 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #2c3e50;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.form-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.field-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid #f1f3f4;
+}
+
+.field-row:last-child {
+    border-bottom: none;
+}
+
+.field-label {
+    font-weight: 500;
+    color: #495057;
+    min-width: 150px;
+    font-size: 0.9rem;
+}
+
+.field-value {
+    color: #2c3e50;
+    font-weight: 400;
+    flex: 1;
+    text-align: right;
+    font-size: 0.9rem;
+}
+
+/* JSON viewer styling */
+.json-viewer-container {
+    background: #f8f9fa;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.json-header {
+    background: #343a40;
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.json-header h6 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.btn-copy-json {
+    background: #28a745;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-copy-json:hover {
+    background: #218838;
+}
+
+.json-viewer {
+    background: #2d3748;
+    color: #e2e8f0;
+    padding: 20px;
+    margin: 0;
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    overflow-x: auto;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.json-viewer code {
+    color: inherit;
+    background: transparent;
+}
+
+/* Loading spinner */
+.loading-spinner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    color: #6c757d;
+}
+
+.loading-spinner div {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Error message styling */
+.error-message {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+}
+
+.error-message h4 {
+    margin: 0 0 10px 0;
+    color: #721c24;
+}
+
+/* B1 form specific styles */
+.form-section {
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.section-title {
+    font-weight: bold;
+    background-color: #ccc;
+    padding: 8px;
+    border-bottom: 1px solid #333;
+}
+
+.form-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.form-table td, .form-table th {
+    padding: 8px;
+    border: 1px solid #ddd;
+}
+
+.form-label {
+    font-weight: bold;
+    width: 30%;
+    background-color: #f9f9f9;
+}
+
+.form-value {
+    width: 70%;
+}
+
+.signature-image {
+    max-width: 200px;
+    max-height: 100px;
+    border: 1px solid #999;
+}
+
+.nested-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.nested-table td {
+    padding: 4px;
+    border: none;
+}
+
+.array-item {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed #ccc;
+}
+
+.array-item:last-child {
+    border-bottom: none;
+}
+
+.array-item-title {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.lot-info {
+    background: #f5f5f5;
+    padding: 10px;
+    border-radius: 4px;
+    margin: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.lot-number {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.form-type-badge {
+    background: #007bff;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+.header {
+    border-bottom: 2px solid #333;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .category-header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    
+    .category-title {
+        justify-content: center;
+    }
+    
+    .lot-header {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+    
+    .form-header {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+    
+    .form-actions {
+        justify-content: center;
+    }
+    
+    .form-meta {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .field-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+    
+    .field-value {
+        text-align: left;
+    }
+    
+    .tab-buttons {
+        flex-direction: column;
+    }
+}
+
+/* Print styles */
+@media print {
+    .form-actions,
+    .btn-toggle-lot,
+    .tab-buttons,
+    .btn-copy-json {
+        display: none !important;
+    }
+    
+    .lot-forms {
+        display: block !important;
+    }
+    
+    .form-card {
+        break-inside: avoid;
+        margin-bottom: 20px;
+    }
+}
+
+.signature-box {
+    border: 1px solid #ddd;
+    padding: 10px;
+    display: inline-block;
+    background-color: #f9f9f9;
+    max-width: 300px;
+}

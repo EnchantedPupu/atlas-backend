@@ -1,0 +1,109 @@
+{
+  "form_type": "",
+  "type": "Hak Adat Bumiputera",
+  "form": "Laporan Hak Adat Bumiputra",
+  "form_id": "A1",
+  "tanah": {
+    "lot_no": "",
+    "sj_no": "",
+    "field_book": "",
+    "lokasi": ""
+  },
+  "penuntut": {
+    "nama": "",
+    "no_kp": "",
+    "alamat": "",
+    "tarikh_lahir": "",
+    "jantina": "",
+    "bangsa": "",
+    "tel": ""
+  },
+  "pertikaian": {
+    "ada_pertikaian": false
+  },
+  "penghuni_tanah_sekarang": {
+    "nama": "",
+    "no_kp": "",
+    "alamat": "",
+    "tarikh_lahir": "",
+    "jantina": "",
+    "bangsa": "",
+    "tel": ""
+  },
+  "butir_kegunaan_tanah": {
+    "topografi": "",
+    "kemudahan_jalan": "",
+    "kegunaan_am": ""
+  },
+  "sejarah_hak": {
+    "tahun_mula_diterokai": "",
+    "bagaimana_hak_diperolehi": "",
+    "nama_peneroka": "",
+    "tandatangan_penuntut": ""
+  },
+  "pengesahan_hak_adat_bumiputra": {
+    "nama": "",
+    "no_kp": "",
+    "jawatan": "",
+    "tarikh": "",
+    "tandatangan": "",
+    "alamat": "",
+    "saksi": {
+      "nama": "",
+      "no_kp": "",
+      "tarikh": "",
+      "jawatan": "",
+      "tandatangan": ""
+    }
+  },
+  "pengesahan_oleh_jiran": {
+    "jiran": [
+      {
+      "nama": "",
+      "no_kp": "",
+      "tandatangan": "",
+      "tarikh": ""
+        },
+        {
+        "nama": "",
+        "no_kp": "",
+        "tandatangan": "",
+        "tarikh": ""
+        },
+        {
+        "nama": "",
+        "no_kp": "",
+        "tandatangan": "",
+        "tarikh": ""
+        }
+    ],
+    "saksi": {
+      "nama": "",
+      "no_kp": "",
+      "tarikh": "",
+      "jawatan": "",
+      "tandatangan": ""
+    }
+  },
+  "pengesahan_pengukur": {
+    "direkod_oleh": {
+      "nama": "",
+      "jawatan": "",
+      "komen": "",
+      "tandatangan": "",
+      "tarikh": ""
+    },
+    "disemak_oleh": {
+      "nama": "",
+      "jawatan": "",
+      "komen": "",
+      "tandatangan": "",
+      "tarikh": ""
+    }
+  },
+  "lampiran": {
+    "form_A1": false,
+    "form_B1": false,
+    "form_C1": false
+  }
+}
