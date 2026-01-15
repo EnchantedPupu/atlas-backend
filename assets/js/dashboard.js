@@ -80,7 +80,9 @@ function toggleSidebar() {
 
 function openSidebar() {
     const sidebar = document.getElementById('sidebar');
+    const contentArea = document.getElementById('contentArea');
     sidebar.classList.remove('collapsed');
+    contentArea.classList.remove('expanded');
     isSidebarCollapsed = false;
     document.getElementById('toggle-icon').textContent = '◄';
 }
@@ -110,13 +112,52 @@ function updateActiveNavItem(activeItem) {
     }
 }
 
+function updateBreadcrumbs(pageTitle = null, pageIcon = '🏠') {
+    const breadcrumbs = document.getElementById('breadcrumbs');
+    if (!breadcrumbs) return;
+    
+    if (!pageTitle) {
+        // Dashboard view - just show Dashboard
+        breadcrumbs.innerHTML = `
+            <div class="breadcrumb-item">
+                <span class="breadcrumb-icon">🏠</span>
+                <span class="active">Dashboard</span>
+            </div>
+        `;
+    } else {
+        // Sub-page view - show Dashboard > Page
+        breadcrumbs.innerHTML = `
+            <div class="breadcrumb-item">
+                <span class="breadcrumb-icon">🏠</span>
+                <a href="#" onclick="showDashboard(); return false;">Dashboard</a>
+            </div>
+            <span class="breadcrumb-separator">›</span>
+            <div class="breadcrumb-item">
+                <span class="breadcrumb-icon">${pageIcon}</span>
+                <span class="active">${pageTitle}</span>
+            </div>
+        `;
+    }
+}
+
 function showDashboard(event = null) {
     if (event) {
         event.preventDefault();
-        updateActiveNavItem(event.target.closest('.nav-item'));
     }
     
+    // Always update the dashboard nav item to active
+    const navItems = document.querySelectorAll('.nav-item');
+    navItems.forEach(item => {
+        const onclickAttr = item.getAttribute('onclick');
+        if (onclickAttr && onclickAttr.includes('showDashboard')) {
+            updateActiveNavItem(item);
+        }
+    });
+    
     currentPage = 'dashboard';
+    
+    // Update breadcrumbs to show only Dashboard
+    updateBreadcrumbs();
     
     const content = document.getElementById('main-content');
     if (content) {
@@ -159,9 +200,33 @@ async function loadPage(filename, pageTitle, event = null) {
     if (event) {
         event.preventDefault();
         updateActiveNavItem(event.target.closest('.nav-item'));
+    } else {
+        // Find and activate the nav item that corresponds to this page
+        const navItems = document.querySelectorAll('.nav-item');
+        navItems.forEach(item => {
+            const onclickAttr = item.getAttribute('onclick');
+            if (onclickAttr && onclickAttr.includes(filename)) {
+                updateActiveNavItem(item);
+            }
+        });
     }
     
     currentPage = filename.replace('.php', '');
+    
+    // Get icon from roleMenus if available
+    let pageIcon = '📄';
+    if (window.roleMenus) {
+        for (const [key, menu] of Object.entries(window.roleMenus)) {
+            if (menu.file === filename) {
+                pageIcon = menu.icon;
+                break;
+            }
+        }
+    }
+    
+    // Update breadcrumbs
+    updateBreadcrumbs(pageTitle, pageIcon);
+    
     showLoading();
     
     try {

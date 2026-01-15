@@ -224,43 +224,52 @@ function getStatusBadgeClass($status) {
 <style>
 .page-header {
     margin-bottom: 2rem;
-    text-align: center;
-    background: #ffffff;
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    border: 1px solid #e2e8f0;
+    padding: 0 0 1.5rem;
+    border-bottom: 1px solid #E2E8F0;
 }
 
 .page-header h2 {
-    color: #1e293b;
-    margin-bottom: 0.5rem;
-    font-size: 2rem;
-    font-weight: 700;
+    color: #0F172A;
+    font-size: 1.875rem;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    margin-bottom: 0.25rem;
 }
 
 .page-header p {
-    color: #64748b;
-    font-size: 1.1rem;
+    color: #64748B;
+    font-size: 0.9375rem;
 }
 
 .alert {
-    padding: 1rem;
+    padding: 1rem 1.25rem;
     border-radius: 8px;
-    margin-bottom: 1rem;
-    border: 1px solid;
+    margin-bottom: 1.5rem;
+    border-left: 4px solid;
+    animation: slideInDown 0.3s ease-out;
+}
+
+@keyframes slideInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .alert-success {
-    background-color: #d1fae5;
-    border-color: #10b981;
-    color: #064e3b;
+    background-color: #ECFDF5;
+    border-color: #10B981;
+    color: #065F46;
 }
 
 .alert-error {
-    background-color: #fee2e2;
-    border-color: #ef4444;
-    color: #991b1b;
+    background-color: #FEF2F2;
+    border-color: #EF4444;
+    color: #991B1B;
 }
 
 .sign-forms-container {
@@ -270,40 +279,67 @@ function getStatusBadgeClass($status) {
 
 .overview-cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.25rem;
     margin-bottom: 2rem;
 }
 
 .overview-card {
-    background: #ffffff;
-    padding: 1.5rem;
-    border-radius: 12px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    border: 1px solid #e2e8f0;
+    background: #FFFFFF;
+    padding: 1.75rem;
+    border-radius: 16px;
+    border: 1px solid #E2E8F0;
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 1.25rem;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.overview-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #10B981, #059669);
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.overview-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px -4px rgba(0, 0, 0, 0.1);
+    border-color: #CBD5E1;
+}
+
+.overview-card:hover::before {
+    opacity: 1;
 }
 
 .overview-icon {
-    font-size: 2rem;
-    padding: 0.5rem;
-    background: #f8fafc;
-    border-radius: 8px;
+    font-size: 2.25rem;
+    padding: 0.875rem;
+    background: linear-gradient(135deg, #ECFDF5, #D1FAE5);
+    border-radius: 12px;
+    line-height: 1;
 }
 
 .overview-content h3 {
-    margin: 0;
-    font-size: 1.5rem;
+    margin: 0 0 0.125rem;
+    font-size: 1.875rem;
     font-weight: 700;
-    color: #1e293b;
+    color: #0F172A;
+    letter-spacing: -0.5px;
 }
 
 .overview-content p {
     margin: 0;
-    color: #64748b;
-    font-size: 0.9rem;
+    color: #64748B;
+    font-size: 0.875rem;
+    font-weight: 500;
 }
 
 .jobs-section {
@@ -338,21 +374,40 @@ function getStatusBadgeClass($status) {
 
 .jobs-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
     gap: 1.5rem;
 }
 
 .job-card {
-    background: #f8fafc;
-    border: 1px solid #e2e8f0;
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
     border-radius: 12px;
-    padding: 1.5rem;
-    transition: all 0.2s ease;
+    padding: 1.75rem;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.job-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(180deg, #10B981, #059669);
+    opacity: 0;
+    transition: opacity 0.25s;
 }
 
 .job-card:hover {
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
-    transform: translateY(-1px);
+    box-shadow: 0 12px 24px -8px rgba(16, 185, 129, 0.15);
+    transform: translateY(-3px);
+    border-color: #CBD5E1;
+}
+
+.job-card:hover::before {
+    opacity: 1;
 }
 
 .job-header {

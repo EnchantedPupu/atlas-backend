@@ -52,134 +52,206 @@ if (basename($_SERVER['PHP_SELF']) !== 'display_example_b1.php') {
     <title>Form View - <?php echo htmlspecialchars($formType); ?></title>
     <link rel="stylesheet" href="/assets/css/forms-display.css">
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
         body {
-            font-family: 'Times New Roman', serif;
-            margin: 20px;
-            background-color: #f5f5f5;
-            color: #333;
-            font-size: 12px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
+            background-color: #F8FAFC;
+            color: #0F172A;
+            font-size: 14px;
+            line-height: 1.6;
+            padding: 2rem 1rem;
         }
+        
         .container {
-            max-width: 900px;
+            max-width: 960px;
             margin: 0 auto;
-            background: white;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            background: #FFFFFF;
+            padding: 3rem;
+            border-radius: 16px;
+            border: 1px solid #E2E8F0;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
         }
+        
         .header {
             text-align: center;
-            border-bottom: 2px solid #333;
-            padding-bottom: 20px;
-            margin-bottom: 30px;
+            border-bottom: 2px solid #2563EB;
+            padding-bottom: 1.5rem;
+            margin-bottom: 2rem;
         }
+        
         .header h1 {
-            margin: 0;
-            font-size: 20px;
-            font-weight: bold;
+            margin: 0 0 0.75rem 0;
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #0F172A;
+            letter-spacing: -0.5px;
         }
+        
         .header h2 {
-            margin: 5px 0 0 0;
-            font-size: 14px;
-            font-weight: normal;
+            margin: 0;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #64748B;
         }
+        
         .form-section {
-            margin-bottom: 25px;
-            border: 1px solid #333;
+            margin-bottom: 2rem;
+            border: 1px solid #E2E8F0;
+            border-radius: 12px;
+            overflow: hidden;
         }
+        
         .section-title {
-            background-color: #f0f0f0;
-            padding: 8px 12px;
-            font-weight: bold;
-            border-bottom: 1px solid #333;
-            font-size: 14px;
+            background: linear-gradient(135deg, #F8FAFC, #EFF6FF);
+            padding: 1rem 1.25rem;
+            font-weight: 600;
+            border-bottom: 1px solid #E2E8F0;
+            font-size: 1rem;
+            color: #0F172A;
+            letter-spacing: -0.2px;
         }
+        
         .form-table {
             width: 100%;
             border-collapse: collapse;
         }
+        
         .form-table td {
-            border: 1px solid #333;
-            padding: 6px 8px;
+            border: 1px solid #E2E8F0;
+            padding: 0.875rem 1rem;
             vertical-align: top;
         }
+        
         .form-label {
-            width: 200px;
-            font-weight: bold;
-            background-color: #f9f9f9;
+            width: 220px;
+            font-weight: 600;
+            background-color: #F8FAFC;
             text-align: left;
+            color: #475569;
+            font-size: 0.875rem;
         }
+        
         .form-value {
-            min-height: 20px;
+            min-height: 24px;
+            color: #0F172A;
+            font-weight: 500;
         }
+        
         .form-value:empty::after {
-            content: "_________________";
-            color: #999;
+            content: "—";
+            color: #CBD5E1;
         }
+        
         .signature-box {
-            border: 1px solid #333;
-            height: 100px;
+            border: 2px dashed #CBD5E1;
+            border-radius: 8px;
+            height: 120px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: #f9f9f9;
-            margin: 2px 0;
+            background-color: #FAFBFC;
+            margin: 0.5rem 0;
+            transition: all 0.2s;
         }
+        
+        .signature-box:hover {
+            border-color: #2563EB;
+            background-color: #EFF6FF;
+        }
+        
         .signature-image {
-            max-width: 250px;
-            max-height: 80px;
+            max-width: 280px;
+            max-height: 100px;
+            border-radius: 4px;
         }
+        
         .array-item {
-            border: 1px solid #ddd;
-            padding: 8px;
-            margin-bottom: 8px;
-            background-color: #fafafa;
+            border: 1px solid #E2E8F0;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            background-color: #FAFBFC;
+            border-radius: 8px;
         }
+        
         .array-item-title {
-            font-weight: bold;
-            margin-bottom: 8px;
-            color: #666;
-            font-size: 11px;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #64748B;
+            font-size: 0.8125rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
         }
+        
         .lot-info {
-            background-color: #e8f4f8;
-            padding: 12px;
-            margin-bottom: 20px;
-            border: 2px solid #007cba;
+            background: linear-gradient(135deg, #EFF6FF, #DBEAFE);
+            padding: 1.25rem;
+            margin-bottom: 1.5rem;
+            border: 2px solid #2563EB;
+            border-radius: 12px;
             text-align: center;
         }
+        
         .lot-number {
-            font-size: 16px;
-            font-weight: bold;
-            color: #007cba;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #1E40AF;
+            letter-spacing: -0.3px;
         }
+        
         .form-type-badge {
             display: inline-block;
-            background-color: #007cba;
+            background: linear-gradient(135deg, #2563EB, #1D4ED8);
             color: white;
-            padding: 4px 8px;
-            border-radius: 3px;
-            font-size: 10px;
-            margin-left: 10px;
+            padding: 0.375rem 0.875rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 0.75rem;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+            box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
         }
+        
         .nested-table {
             width: 100%;
             border-collapse: collapse;
-            margin: 4px 0;
+            margin: 0.5rem 0;
         }
+        
         .nested-table td {
-            border: 1px solid #ccc;
-            padding: 4px 6px;
-            font-size: 11px;
+            border: 1px solid #E2E8F0;
+            padding: 0.5rem 0.75rem;
+            font-size: 0.875rem;
         }
+        
         .nested-table .nested-label {
-            width: 120px;
-            font-weight: bold;
-            background-color: #f5f5f5;
+            width: 140px;
+            font-weight: 600;
+            background-color: #F8FAFC;
+            color: #64748B;
         }
+        
         @media print {
-            body { margin: 0; }
-            .container { box-shadow: none; }
-            .form-section { page-break-inside: avoid; }
+            body { 
+                margin: 0; 
+                background: white;
+                padding: 0;
+            }
+            .container { 
+                box-shadow: none;
+                border: none;
+                border-radius: 0;
+            }
+            .form-section { 
+                page-break-inside: avoid;
+                border-radius: 0;
+            }
         }
     </style>
 </head>

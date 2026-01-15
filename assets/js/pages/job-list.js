@@ -604,110 +604,143 @@ function viewJobDetails(jobId) {
                 throw new Error(data.error);
             }
             
-            // Build job details HTML
+            // Build simplified job details HTML for Job List view
             content.innerHTML = `
-                <div class="job-details-grid">
-                    <div class="detail-section">
-                        <h4>📋 Job Information</h4>
-                        <div class="detail-row">
-                            <span class="label">Job Number:</span>
-                            <span class="value">${data.surveyjob_no || 'N/A'}</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="label">HQ Reference:</span>
-                            <span class="value">${data.hq_ref || 'N/A'}</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="label">Division Reference:</span>
-                            <span class="value">${data.div_ref || 'N/A'}</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="label">Project Name:</span>
-                            <span class="value">${data.projectname || 'N/A'}</span>
-                        </div>                        <div class="detail-row">
-                            <span class="label">Status:</span>
-                            <span class="value">
+                <div class="job-quick-info">
+                    <div class="info-card primary-info">
+                        <div class="info-header">
+                            <h3>📋 ${data.projectname || 'N/A'}</h3>
+                            <div class="status-badges">
                                 <span class="status-badge status-${data.status?.toLowerCase() || 'default'}">${data.status || 'Unknown'}</span>
-                            </span>
+                                ${data.pbtstatus && data.pbtstatus !== 'none' ? 
+                                    `<span class="pbtstatus-badge pbtstatus-${data.pbtstatus?.toLowerCase()}">${data.pbtstatus}</span>` 
+                                    : ''}
+                            </div>
                         </div>
-                        <div class="detail-row">
-                            <span class="label">PBT Status:</span>
-                            <span class="value">
-                                <span class="pbtstatus-badge pbtstatus-${data.pbtstatus?.toLowerCase() || 'none'}">${data.pbtstatus || 'none'}</span>
-                            </span>
+                        
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <span class="info-icon">🔢</span>
+                                <div class="info-content">
+                                    <div class="info-label">Job Number</div>
+                                    <div class="info-value">${data.surveyjob_no || 'N/A'}</div>
+                                </div>
+                            </div>
+                            
+                            <div class="info-item">
+                                <span class="info-icon">📌</span>
+                                <div class="info-content">
+                                    <div class="info-label">HQ Reference</div>
+                                    <div class="info-value">${data.hq_ref || 'N/A'}</div>
+                                </div>
+                            </div>
+                            
+                            <div class="info-item">
+                                <span class="info-icon">🏢</span>
+                                <div class="info-content">
+                                    <div class="info-label">Division Reference</div>
+                                    <div class="info-value">${data.div_ref || 'N/A'}</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     
-                    <div class="detail-section">
-                        <h4>👥 Assignment & Dates</h4>
-                        <div class="detail-row">
-                            <span class="label">Created By:</span>
-                            <span class="value">${data.created_by_name || 'Unknown'} (${data.created_by_role || 'N/A'})</span>
+                    <div class="info-card assignment-info">
+                        <div class="info-header">
+                            <h4>👥 Assignment</h4>
                         </div>
-                        <div class="detail-row">
-                            <span class="label">Assigned To:</span>
-                            <span class="value">${data.assigned_to_name ? `${data.assigned_to_name} (${data.assigned_to_role || 'N/A'})` : 'Not Assigned'}</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="label">Created Date:</span>
-                            <span class="value">${data.created_at || 'N/A'}</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="label">Last Updated:</span>
-                            <span class="value">${data.updated_at || 'N/A'}</span>
+                        <div class="assignment-grid">
+                            <div class="assignment-item">
+                                <div class="assignment-label">Created By</div>
+                                <div class="assignment-value">
+                                    <span class="user-name">${data.created_by_name || 'Unknown'}</span>
+                                    <span class="user-role">${data.created_by_role || 'N/A'}</span>
+                                </div>
+                            </div>
+                            <div class="assignment-item">
+                                <div class="assignment-label">Assigned To</div>
+                                <div class="assignment-value">
+                                    ${data.assigned_to_name ? 
+                                        `<span class="user-name">${data.assigned_to_name}</span>
+                                         <span class="user-role">${data.assigned_to_role || 'N/A'}</span>` 
+                                        : '<span class="unassigned">Not Assigned</span>'}
+                                </div>
+                            </div>
+                            <div class="assignment-item">
+                                <div class="assignment-label">Created</div>
+                                <div class="assignment-value">
+                                    <span class="date-value">${data.created_at || 'N/A'}</span>
+                                </div>
+                            </div>
+                            <div class="assignment-item">
+                                <div class="assignment-label">Last Updated</div>
+                                <div class="assignment-value">
+                                    <span class="date-value">${data.updated_at || 'N/A'}</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 
                 ${data.form_count > 0 ? `
-                    <div class="forms-section">
-                        <h4>📄 Forms (${data.form_count})</h4>
-                        <div class="forms-summary">
-                            <p>Available Form Types: ${data.form_types.join(', ')}</p>
-                            <button onclick="loadJobForms(${jobId})" class="btn-load-forms">
-                                📋 View All Forms
-                            </button>
+                    <div class="forms-quick-view">
+                        <div class="quick-view-header">
+                            <h4>📄 Forms Summary</h4>
+                            <span class="form-count-badge">${data.form_count} Forms</span>
                         </div>
+                        <div class="forms-types">
+                            ${data.form_types.map(type => `<span class="form-type-tag">${type}</span>`).join('')}
+                        </div>
+                        <button onclick="loadJobForms(${jobId})" class="btn-load-forms">
+                            📋 View All Forms
+                        </button>
                         <div id="formsContainer" class="forms-container" style="display: none;">
                             <!-- Forms will be loaded here -->
                         </div>
                     </div>
                 ` : `
-                    <div class="forms-section">
-                        <h4>📄 Forms</h4>
-                        <div class="no-forms">
-                            <p>No forms available for this job.</p>
+                    <div class="forms-quick-view empty">
+                        <div class="empty-forms-message">
+                            <span class="empty-icon">📄</span>
+                            <p>No forms available for this job</p>
                         </div>
                     </div>
                 `}
                 
                 ${data.attachment_name && data.attachment_name !== 'no_file_uploaded.pdf' || (data.sj_files && data.sj_files.length > 0) ? `
-                    <div class="attachment-section">
-                        <h4>📎 Attachments</h4>
-                        ${data.attachment_name && data.attachment_name !== 'no_file_uploaded.pdf' ? `
-                            <div class="attachment-item">
-                                <span>📄 ${data.attachment_name}</span>
-                                <button onclick="openAttachment('uploads/jobs/oic/${data.attachment_name}')" class="btn-view">
-                                     View
-                                </button>
-                            </div>
-                        ` : ''}
-                        ${data.sj_files && data.sj_files.length > 0 ? `
-                            <div class="additional-attachments">
-                                <h5>📋 Additional Files (${data.sj_files.length})</h5>
-                                ${data.sj_files.map(file => `
-                                    <div class="attachment-item">
-                                        <div class="attachment-info">
-                                            <span class="attachment-name">📄 ${file.description || file.attachment_name}</span>
-                                            <span class="attachment-date">📅 ${file.created_at}</span>
+                    <div class="attachments-quick-view">
+                        <div class="quick-view-header">
+                            <h4>📎 Attachments</h4>
+                            <span class="attachment-count-badge">${(data.attachment_name && data.attachment_name !== 'no_file_uploaded.pdf' ? 1 : 0) + (data.sj_files ? data.sj_files.length : 0)}</span>
+                        </div>
+                        <div class="attachments-list">
+                            ${data.attachment_name && data.attachment_name !== 'no_file_uploaded.pdf' ? `
+                                <div class="attachment-card">
+                                    <span class="file-icon">📄</span>
+                                    <div class="file-info">
+                                        <div class="file-name">${data.attachment_name}</div>
+                                        <div class="file-label">Main Attachment</div>
+                                    </div>
+                                    <button onclick="openAttachment('uploads/jobs/oic/${data.attachment_name}')" class="btn-download-file">
+                                        💾 Download
+                                    </button>
+                                </div>
+                            ` : ''}
+                            ${data.sj_files && data.sj_files.length > 0 ? 
+                                data.sj_files.map(file => `
+                                    <div class="attachment-card">
+                                        <span class="file-icon">📎</span>
+                                        <div class="file-info">
+                                            <div class="file-name">${file.description || file.attachment_name}</div>
+                                            <div class="file-date">${file.created_at}</div>
                                         </div>
-                                        <button onclick="openSjFile('${file.attachment_name}')" class="btn-view">
-                                             View
+                                        <button onclick="openSjFile('${file.attachment_name}')" class="btn-download-file">
+                                            💾 Download
                                         </button>
                                     </div>
-                                `).join('')}
-                            </div>
-                        ` : ''}
+                                `).join('') 
+                            : ''}
+                        </div>
                     </div>
                 ` : ''}
                 

@@ -905,24 +905,21 @@ function getStatusBadgeClass($status) {
 <style>
 .page-header {
     margin-bottom: 2rem;
-    text-align: center;
-    background: #ffffff;
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
-    border: 1px solid #e2e8f0;
+    padding: 0 0 1.5rem;
+    border-bottom: 1px solid #E2E8F0;
 }
 
 .page-header h2 {
-    color: #1e293b;
-    margin-bottom: 0.5rem;
-    font-size: 2rem;
-    font-weight: 700;
+    color: #0F172A;
+    font-size: 1.875rem;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    margin-bottom: 0.25rem;
 }
 
 .page-header p {
-    color: #64748b;
-    font-size: 1.1rem;
+    color: #64748B;
+    font-size: 0.9375rem;
 }
 
 .report-container {
@@ -949,20 +946,20 @@ function getStatusBadgeClass($status) {
 
 .tab-button {
     padding: 2rem 1.5rem;
-    border: 2px solid #e2e8f0;
+    border: 1px solid #E2E8F0;
     border-radius: 16px;
-    background: linear-gradient(135deg, #f8fafc, #f1f5f9);
-    color: #64748b;
+    background: #FFFFFF;
+    color: #64748B;
     cursor: pointer;
-    font-weight: 500;
-    transition: all 0.3s ease;
+    font-weight: 600;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 0.75rem;
-    min-height: 160px;
+    gap: 0.875rem;
+    min-height: 170px;
     position: relative;
     overflow: hidden;
 }
@@ -971,36 +968,42 @@ function getStatusBadgeClass($status) {
     content: '';
     position: absolute;
     top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-    transition: left 0.5s;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #2563EB, #3B82F6);
+    opacity: 0;
+    transition: opacity 0.25s;
 }
 
 .tab-button:hover::before {
-    left: 100%;
+    opacity: 1;
 }
 
 .tab-button:hover {
-    border-color: #3b82f6;
-    color: #3b82f6;
-    background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+    border-color: #CBD5E1;
+    color: #2563EB;
+    background: #F8FAFC;
     transform: translateY(-4px);
-    box-shadow: 0 10px 25px rgba(59, 130, 246, 0.15);
+    box-shadow: 0 12px 24px -8px rgba(37, 99, 235, 0.2);
 }
 
 .tab-button.active {
-    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    background: linear-gradient(135deg, #2563EB, #1D4ED8);
     color: white;
-    border-color: #3b82f6;
+    border-color: #2563EB;
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
+    box-shadow: 0 8px 20px rgba(37, 99, 235, 0.35);
+}
+
+.tab-button.active::before {
+    opacity: 1;
+    background: linear-gradient(90deg, rgba(255,255,255,0.2), rgba(255,255,255,0.4));
 }
 
 .tab-button.active:hover {
     transform: translateY(-4px);
-    box-shadow: 0 12px 30px rgba(59, 130, 246, 0.4);
+    box-shadow: 0 12px 30px rgba(37, 99, 235, 0.45);
 }
 
 .tab-icon {

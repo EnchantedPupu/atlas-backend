@@ -441,24 +441,21 @@ function calculateTimeline($fiTaDate, $isCompleted) {
 <style>
 .page-header {
     margin-bottom: 2rem;
-    text-align: center;
-    background: #ffffff;
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
-    border: 1px solid #e2e8f0;
+    padding: 0 0 1.5rem;
+    border-bottom: 1px solid #E2E8F0;
 }
 
 .page-header h2 {
-    color: #1e293b;
-    margin-bottom: 0.5rem;
-    font-size: 2rem;
-    font-weight: 700;
+    color: #0F172A;
+    font-size: 1.875rem;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    margin-bottom: 0.25rem;
 }
 
 .page-header p {
-    color: #64748b;
-    font-size: 1.1rem;
+    color: #64748B;
+    font-size: 0.9375rem;
 }
 
 .job-progress-container {
@@ -468,26 +465,44 @@ function calculateTimeline($fiTaDate, $isCompleted) {
 
 .summary-cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.25rem;
     margin-bottom: 2rem;
 }
 
 .summary-card {
-    background: #ffffff;
-    padding: 1.5rem;
-    border-radius: 12px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
-    border: 1px solid #e2e8f0;
+    background: #FFFFFF;
+    padding: 1.75rem;
+    border-radius: 16px;
+    border: 1px solid #E2E8F0;
     display: flex;
     align-items: center;
-    gap: 1rem;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    gap: 1.25rem;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.summary-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #2563EB, #3B82F6);
+    opacity: 0;
+    transition: opacity 0.25s;
 }
 
 .summary-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 24px -8px rgba(37, 99, 235, 0.15);
+    border-color: #CBD5E1;
+}
+
+.summary-card:hover::before {
+    opacity: 1;
 }
 
 .card-icon {
@@ -514,11 +529,10 @@ function calculateTimeline($fiTaDate, $isCompleted) {
 }
 
 .filters-section {
-    background: #ffffff;
+    background: #FFFFFF;
     padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
-    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    border: 1px solid #E2E8F0;
     margin-bottom: 2rem;
 }
 
@@ -622,10 +636,9 @@ function calculateTimeline($fiTaDate, $isCompleted) {
 }
 
 .jobs-table-container {
-    background: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
-    border: 1px solid #e2e8f0;
+    background: #FFFFFF;
+    border-radius: 16px;
+    border: 1px solid #E2E8F0;
     overflow: hidden;
 }
 

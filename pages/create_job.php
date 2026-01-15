@@ -424,50 +424,73 @@ try {
 <!-- Include file upload CSS -->
 <link rel="stylesheet" href="../assets/css/file-upload.css">
 
-<!-- Move styles to a separate section that will be processed -->
+<!-- Modern SaaS Styling -->
 <style>
+/* Modern Design System */
+:root {
+    --color-primary: #2563EB;
+    --color-primary-hover: #1D4ED8;
+    --color-primary-light: #DBEAFE;
+    --color-bg-primary: #F8FAFC;
+    --color-bg-secondary: #FFFFFF;
+    --color-text-primary: #0F172A;
+    --color-text-secondary: #64748B;
+    --color-border: #E2E8F0;
+    --color-success: #10B981;
+    --color-success-bg: #D1FAE5;
+    --color-error: #EF4444;
+    --color-error-bg: #FEE2E2;
+    --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 16px;
+}
+
 .page-header {
-    margin-bottom: 2rem;
-    text-align: center;
-    background: #ffffff;
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
-    border: 1px solid #e2e8f0;
+    margin-bottom: 32px;
+    text-align: left;
+    background: var(--color-bg-secondary);
+    padding: 32px;
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--color-border);
 }
 
 .page-header h2 {
-    color: #1e293b;
-    margin-bottom: 0.5rem;
-    font-size: 2rem;
+    color: var(--color-text-primary);
+    margin-bottom: 8px;
+    font-size: 28px;
     font-weight: 700;
+    letter-spacing: -0.5px;
 }
 
 .page-header p {
-    color: #64748b;
-    font-size: 1.1rem;
+    color: var(--color-text-secondary);
+    font-size: 16px;
 }
 
 .form-container {
-    background: #ffffff;
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
-    border: 1px solid #e2e8f0;
-    max-width: 800px;
+    background: var(--color-bg-secondary);
+    padding: 32px;
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--color-border);
+    max-width: 900px;
     margin: 0 auto;
 }
 
 .job-form {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 24px;
 }
 
 .form-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 1rem;
+    gap: 20px;
 }
 
 .form-group {
@@ -480,173 +503,193 @@ try {
 }
 
 .form-group label {
-    margin-bottom: 0.5rem;
-    font-weight: 500;
-    color: #1e293b;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    font-size: 14px;
 }
 
-.form-group input {
-    padding: 0.75rem;
-    border: 1px solid #d1d5db;
-    border-radius: 8px;
-    font-size: 1rem;
-    transition: border-color 0.3s;
-    background: #ffffff;
+.form-group input,
+.form-group select,
+.form-group textarea {
+    padding: 12px 16px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    font-size: 15px;
+    transition: all 0.2s ease;
+    background: var(--color-bg-secondary);
+    color: var(--color-text-primary);
+    font-family: inherit;
 }
 
-.form-group input:focus {
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
     outline: none;
-    border-color: #3b82f6;
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px var(--color-primary-light);
+}
+
+.form-group small {
+    margin-top: 6px;
+    font-size: 13px;
+    color: var(--color-text-secondary);
 }
 
 .form-actions {
     display: flex;
-    gap: 1rem;
-    justify-content: center;
-    margin-top: 1rem;
+    gap: 12px;
+    justify-content: flex-start;
+    margin-top: 8px;
+    padding-top: 24px;
+    border-top: 1px solid var(--color-border);
 }
 
 .btn-primary, .btn-secondary {
-    padding: 0.75rem 2rem;
+    padding: 12px 24px;
     border: none;
-    border-radius: 8px;
-    font-size: 1rem;
+    border-radius: var(--radius-md);
+    font-size: 15px;
     cursor: pointer;
-    transition: all 0.3s;
-    font-weight: 500;
+    transition: all 0.2s ease;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
 }
 
 .btn-primary {
-    background: #3b82f6;
+    background: var(--color-primary);
     color: white;
+    box-shadow: var(--shadow-sm);
 }
 
 .btn-primary:hover {
-    background: #2563eb;
+    background: var(--color-primary-hover);
+    box-shadow: var(--shadow-md);
     transform: translateY(-1px);
 }
 
 .btn-secondary {
-    background: #f1f5f9;
-    color: #1e293b;
-    border: 1px solid #d1d5db;
+    background: var(--color-bg-primary);
+    color: var(--color-text-primary);
+    border: 1px solid var(--color-border);
 }
 
 .btn-secondary:hover {
-    background: #e2e8f0;
+    background: #E2E8F0;
+    border-color: #CBD5E1;
 }
 
 .success-message {
-    background: #d1fae5;
-    border: 1px solid #10b981;
-    color: #065f46;
-    padding: 2rem;
-    border-radius: 12px;
-    margin-bottom: 2rem;
-    text-align: center;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+    background: var(--color-success-bg);
+    border: 1px solid var(--color-success);
+    color: #065F46;
+    padding: 32px;
+    border-radius: var(--radius-xl);
+    margin-bottom: 32px;
+    box-shadow: var(--shadow-md);
 }
 
 .success-message h3 {
-    margin-top: 0;
-    margin-bottom: 1rem;
-    color: #065f46;
-    font-size: 1.5rem;
+    margin: 0 0 16px 0;
+    color: #065F46;
+    font-size: 22px;
+    font-weight: 700;
 }
 
 .success-message p {
-    margin-bottom: 1.5rem;
-    font-size: 1.1rem;
+    margin-bottom: 24px;
+    font-size: 16px;
+    line-height: 1.6;
 }
 
 .success-actions {
     display: flex;
-    gap: 1rem;
-    justify-content: center;
+    gap: 12px;
     flex-wrap: wrap;
 }
 
-.success-actions .btn-primary,
-.success-actions .btn-secondary {
-    padding: 0.75rem 1.5rem;
-    border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: all 0.3s;
-    text-decoration: none;
-    display: inline-block;
-    font-weight: 500;
-}
-
 .success-actions .btn-primary {
-    background: #10b981;
-    color: white;
+    background: var(--color-success);
 }
 
 .success-actions .btn-primary:hover {
     background: #059669;
-    transform: translateY(-1px);
 }
 
 .success-actions .btn-secondary {
-    background: #3b82f6;
+    background: var(--color-primary);
     color: white;
+    border: none;
 }
 
 .success-actions .btn-secondary:hover {
-    background: #2563eb;
-    transform: translateY(-1px);
+    background: var(--color-primary-hover);
 }
 
 .error-message {
-    background: #fee2e2;
-    border: 1px solid #fecaca;
-    color: #b91c1c;
-    padding: 1rem;
-    border-radius: 8px;
-    margin-bottom: 1rem;
+    background: var(--color-error-bg);
+    border: 1px solid var(--color-error);
+    color: #991B1B;
+    padding: 20px;
+    border-radius: var(--radius-lg);
+    margin-bottom: 24px;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.error-message strong {
+    font-weight: 700;
+    display: block;
+    margin-bottom: 8px;
 }
 
 .assignment-section {
-    background: #f8fafc;
-    padding: 1.5rem;
-    border-radius: 12px;
-    margin: 1rem 0;
-    border: 1px solid #e2e8f0;
+    background: var(--color-bg-primary);
+    padding: 24px;
+    border-radius: var(--radius-lg);
+    margin: 8px 0;
+    border: 1px solid var(--color-border);
 }
 
 .assignment-section h3 {
-    margin-top: 0;
-    margin-bottom: 1rem;
-    color: #1e293b;
-    font-size: 1.1rem;
+    margin: 0 0 16px 0;
+    color: var(--color-text-primary);
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.assignment-section p {
+    color: var(--color-text-secondary);
+    font-size: 14px;
+    margin-bottom: 0;
 }
 
 .file-upload-area {
     position: relative;
-    border: 2px dashed #d1d5db;
-    border-radius: 12px;
-    padding: 2rem;
+    border: 2px dashed var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 32px;
     text-align: center;
-    transition: all 0.3s;
+    transition: all 0.3s ease;
     cursor: pointer;
-    min-height: 120px;
+    min-height: 140px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #f8fafc;
+    background: var(--color-bg-primary);
 }
 
 .file-upload-area:hover {
-    border-color: #3b82f6;
-    background-color: #f1f5f9;
+    border-color: var(--color-primary);
+    background-color: var(--color-primary-light);
 }
 
 .file-upload-area.has-file {
-    border-color: #10b981;
-    background-color: #f0fdf4;
+    border-color: var(--color-success);
+    background-color: var(--color-success-bg);
 }
 
 .file-upload-area input[type="file"] {
@@ -663,114 +706,88 @@ try {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.5rem;
+    gap: 8px;
     pointer-events: none;
 }
 
-.file-icon {
-    font-size: 2rem;
-    color: #64748b;
+.file-upload-text span:first-of-type {
+    font-weight: 600;
+    color: var(--color-text-primary);
+    font-size: 15px;
 }
 
-.file-upload-area:hover .file-icon {
-    color: #3b82f6;
+.file-upload-text small {
+    color: var(--color-text-secondary);
+    font-size: 13px;
+}
+
+.file-icon {
+    font-size: 32px;
+    margin-bottom: 4px;
 }
 
 .file-preview {
-    margin-top: 1rem;
+    margin-top: 16px;
     display: none;
 }
 
 .file-item {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    padding: 1rem;
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 8px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    gap: 12px;
+    padding: 16px;
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
 }
 
 .file-item .file-icon {
-    font-size: 1.5rem;
-    color: #dc2626;
+    font-size: 24px;
 }
 
 .file-name {
     flex: 1;
-    font-weight: 500;
-    color: #1e293b;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    font-size: 14px;
 }
 
 .file-size {
-    color: #64748b;
-    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    font-size: 13px;
 }
 
 .remove-file {
-    background: #dc2626;
+    background: var(--color-error);
     color: white;
     border: none;
     border-radius: 50%;
-    width: 24px;
-    height: 24px;
+    width: 28px;
+    height: 28px;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.75rem;
-    transition: background-color 0.3s;
+    font-size: 14px;
+    transition: background-color 0.2s;
 }
 
 .remove-file:hover {
-    background: #b91c1c;
-}
-
-select {
-    padding: 0.75rem;
-    border: 1px solid #d1d5db;
-    border-radius: 8px;
-    font-size: 1rem;
-    width: 100%;
-    transition: border-color 0.3s;
-    background: #ffffff;
-}
-
-select:focus {
-    outline: none;
-    border-color: #3b82f6;
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    background: #DC2626;
 }
 
 select:disabled {
-    background-color: #f1f5f9;
-    color: #94a3b8;
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-secondary);
     cursor: not-allowed;
+    opacity: 0.6;
 }
 
-/* Additional CSS for form validation */
 .form-group input.error,
 .form-group select.error {
-    border-color: #dc2626;
-    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
-}
-
-.loading-spinner {
-    text-align: center;
-    padding: 2rem;
-    color: #64748b;
-}
-
-.loading-spinner::after {
-    content: "⏳";
-    font-size: 2rem;
-    animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
+    border-color: var(--color-error);
+    box-shadow: 0 0 0 3px var(--color-error-bg);
 }
 
 @media (max-width: 768px) {
@@ -778,12 +795,16 @@ select:disabled {
         grid-template-columns: 1fr;
     }
     
-    .form-actions {
-        flex-direction: column;
+    .form-container {
+        padding: 24px;
     }
     
-    .success-actions {
-        flex-direction: column;
+    .page-header {
+        padding: 24px;
+    }
+    
+    .page-header h2 {
+        font-size: 24px;
     }
 }
 </style>
