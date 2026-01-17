@@ -175,152 +175,12 @@ function updateJobDisplay() {
 
 // Initialize modals
 function initializeModals() {
-    // Job details modal
-    initializeJobDetailsModal();
-    
+    // Job details modal - handled by job-details-modal.js
     // Assignment modal  
     initializeAssignmentModal();
 }
 
-// Initialize job details modal
-function initializeJobDetailsModal() {
-    // Modal will be handled by existing functions
-    console.log('Job details modal initialized');
-}
-
-// Initialize assignment modal
-function initializeAssignmentModal() {
-    // Modal will be handled by existing functions
-    console.log('Assignment modal initialized');
-}
-
-// View job details
-function viewJobDetails(jobId) {
-    console.log(`Viewing job details for ID: ${jobId}`);
-    
-    const modal = document.getElementById('jobDetailsModal');
-    const content = document.getElementById('jobDetailsContent');
-    
-    if (!modal || !content) {
-        console.error('Job details modal not found');
-        return;
-    }
-    
-    // Show loading
-    content.innerHTML = `
-        <div class="loading-spinner">
-            <div>⏳</div>
-            <p>Loading job details...</p>
-        </div>
-    `;
-    
-    modal.style.display = 'flex';
-    
-    // Fetch actual job details from API
-    fetch(`api/get_job_details.php?job_id=${jobId}`)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then(data => {
-            if (data.error) {
-                throw new Error(data.error);
-            }
-            
-            // Build job details HTML
-            content.innerHTML = `
-                <div class="job-details-grid">
-                    <div class="detail-section">
-                        <h4>📋 Job Information</h4>
-                        <div class="detail-row">
-                            <span class="label">Job Number:</span>
-                            <span class="value">${data.surveyjob_no || 'N/A'}</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="label">HQ Reference:</span>
-                            <span class="value">${data.hq_ref || 'N/A'}</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="label">Division Reference:</span>
-                            <span class="value">${data.div_ref || 'N/A'}</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="label">Project Name:</span>
-                            <span class="value">${data.projectname || 'N/A'}</span>
-                        </div>                        <div class="detail-row">
-                            <span class="label">Status:</span>
-                            <span class="value">
-                                <span class="status-badge status-${data.status?.toLowerCase() || 'default'}">${data.status || 'Unknown'}</span>
-                            </span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="label">PBT Status:</span>
-                            <span class="value">
-                                <span class="pbtstatus-badge pbtstatus-${data.pbtstatus?.toLowerCase() || 'none'}">${data.pbtstatus || 'none'}</span>
-                            </span>
-                        </div>
-                    </div>
-                    
-                    <div class="detail-section">
-                        <h4>👥 Assignment & Dates</h4>
-                        <div class="detail-row">
-                            <span class="label">Created By:</span>
-                            <span class="value">${data.created_by_name || 'Unknown'} (${data.created_by_role || 'N/A'})</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="label">Assigned To:</span>
-                            <span class="value">${data.assigned_to_name ? `${data.assigned_to_name} (${data.assigned_to_role || 'N/A'})` : 'Not Assigned'}</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="label">Created Date:</span>
-                            <span class="value">${data.created_at || 'N/A'}</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="label">Last Updated:</span>
-                            <span class="value">${data.updated_at || 'N/A'}</span>
-                        </div>
-                    </div>
-                </div>
-                
-                ${data.attachment_name && data.attachment_name !== 'no_file_uploaded.pdf' ? `
-                    <div class="attachment-section">
-                        <h4>📎 Attachments</h4>
-                        <div class="attachment-item">
-                            <span>📄 ${data.attachment_name}</span>
-                            <button onclick="downloadAttachment('${data.attachment_name}')" class="btn-download">
-                                📥 Download
-                            </button>
-                        </div>
-                    </div>
-                ` : ''}
-                
-                <div class="modal-actions">
-                    <button onclick="closeJobDetailsModal()" class="btn-secondary">Close</button>
-                </div>
-            `;
-        })
-        .catch(error => {
-            console.error('Error loading job details:', error);
-            content.innerHTML = `
-                <div class="error-message">
-                    <h4>❌ Error Loading Job Details</h4>
-                    <p>${error.message || 'Failed to load job details. Please try again.'}</p>
-                    <button onclick="viewJobDetails(${jobId})" class="btn-secondary">🔄 Retry</button>
-                    <button onclick="closeJobDetailsModal()" class="btn-secondary">Close</button>
-                </div>
-            `;
-        });
-}
-
-// Close job details modal
-function closeJobDetailsModal() {
-    const modal = document.getElementById('jobDetailsModal');
-    if (modal) {
-        modal.style.display = 'none';
-    }
-}
+// Note: Job details modal functions are now in job-details-modal.js
 
 // Assign job
 function assignJob(jobId) {
@@ -500,17 +360,12 @@ function updateWorkflowInfo(currentRole) {
     workflowInfo.innerHTML = `<p><strong>Current Step:</strong> ${workflows[currentRole] || 'Unknown workflow'}</p>`;
 }
 
-// Download attachment
-function downloadAttachment(filename) {
-    console.log(`Downloading attachment: ${filename}`);
-    
-    // Create download link
-    const link = document.createElement('a');
-    link.href = `uploads/${filename}`;
-    link.download = filename;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+// Note: downloadAttachment function is now in job-details-modal.js
+
+// Initialize assignment modal
+function initializeAssignmentModal() {
+    // Modal will be handled by existing functions
+    console.log('Assignment modal initialized');
 }
 
 // Export filtered jobs

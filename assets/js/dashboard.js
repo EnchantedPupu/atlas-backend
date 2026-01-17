@@ -293,6 +293,12 @@ async function loadPageScript(pageName) {
 
 // Initialize page-specific functionality
 function initializePage(pageName) {
+    // Reset job details modal context for all pages except report
+    // Report page uses ../api/ paths, all other pages use api/ paths
+    if (typeof setJobDetailsModalContext === 'function') {
+        setJobDetailsModalContext(pageName === 'report');
+    }
+    
     switch(pageName) {
         case 'create_job':
             if (typeof initializeCreateJobPage === 'function') {
@@ -582,9 +588,34 @@ window.fetchNewTaskCount = fetchNewTaskCount;
 window.updateNewTaskCounter = updateNewTaskCounter;
 window.refreshNewTaskCount = refreshNewTaskCount;
 
+// Load Job Details Modal script (centralized)
+function loadJobDetailsModalScript() {
+    const scriptId = 'job-details-modal-script';
+    
+    // Check if script already exists
+    if (document.getElementById(scriptId)) {
+        console.log('Job Details Modal script already loaded');
+        return;
+    }
+    
+    const script = document.createElement('script');
+    script.id = scriptId;
+    script.src = 'assets/js/job-details-modal.js';
+    script.onload = () => {
+        console.log('Job Details Modal script loaded successfully');
+    };
+    script.onerror = () => {
+        console.error('Failed to load Job Details Modal script');
+    };
+    document.head.appendChild(script);
+}
+
 // Initialize dashboard
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Dashboard initialized');
+    
+    // Load the centralized Job Details Modal script
+    loadJobDetailsModalScript();
     
     // Set initial sidebar state based on screen size
     if (window.innerWidth <= 768) {
