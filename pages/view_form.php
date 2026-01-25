@@ -1,4 +1,7 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 require_once '../config/database.php';
 
 // Skip database query if this is the example display script
@@ -105,6 +108,7 @@ if (basename($_SERVER['PHP_SELF']) !== 'display_example_b1.php') {
             border: 1px solid #E2E8F0;
             border-radius: 12px;
             overflow: hidden;
+            overflow-x: auto; /* Allow horizontal scrolling */
         }
         
         .section-title {
@@ -305,11 +309,11 @@ if (basename($_SERVER['PHP_SELF']) !== 'display_example_b1.php') {
             echo "<div class='form-section'>";
             echo "<div class='section-title'>" . htmlspecialchars($sectionTitle);
             if ($isTidakBerkaitan) {
-                echo " <span style='color: #dc2626; font-weight: 700; margin-left: 10px;'>[TIDAK BERKAITAN]</span>";
+                echo " <span style='color: #dc2626; font-weight: 700; margin-left: 10px;'>[TIDAK BERKENAAN]</span>";
             }
             echo "</div>";
             
-            // If section is tidak berkaitan, don't render the content
+            // If section is TIDAK BERKENAAN, don't render the content
             if ($isTidakBerkaitan) {
                 echo "</div>";
                 return;
@@ -448,43 +452,6 @@ if (basename($_SERVER['PHP_SELF']) !== 'display_example_b1.php') {
                 }
             }
             
-            // Handle B1 form specific fields with table heading and checkbox display
-            if ($key === 'berbuah') {
-                $options = ['sudah', 'belum'];
-                $html = '<table style="width: 100%; border-collapse: collapse;">';
-                $html .= '<tr><td style="border: 1px solid #333; padding: 4px 8px; text-align: center; font-weight: bold; background-color: #f0f0f0;">Berbuah</td></tr>';
-                $html .= '<tr><td style="border: 1px solid #333; padding: 8px;">';
-                $html .= '<div style="display: flex; gap: 15px; justify-content: center;">';
-                foreach ($options as $option) {
-                    $isSelected = ($value === true && $option === 'sudah') || ($value === false && $option === 'belum');
-                    $tick = $isSelected ? '<div style="text-align: center; margin-top: 4px;"><span style="font-size: 16px; color: #28a745;">✓</span></div>' : '';
-                    $html .= '<div style="text-align: center;">';
-                    $html .= '<div style="border: 1px solid #333; padding: 4px 8px; min-width: 60px; text-align: center;">' . ucfirst($option) . '</div>';
-                    $html .= $tick;
-                    $html .= '</div>';
-                }
-                $html .= '</div></td></tr></table>';
-                return $html;
-            }
-            
-            if ($key === 'penjagaan') {
-                $options = ['ya', 'tidak'];
-                $html = '<table style="width: 100%; border-collapse: collapse;">';
-                $html .= '<tr><td style="border: 1px solid #333; padding: 4px 8px; text-align: center; font-weight: bold; background-color: #f0f0f0;">Penjagaan</td></tr>';
-                $html .= '<tr><td style="border: 1px solid #333; padding: 8px;">';
-                $html .= '<div style="display: flex; gap: 15px; justify-content: center;">';
-                foreach ($options as $option) {
-                    $isSelected = ($value === true && $option === 'ya') || ($value === false && $option === 'tidak');
-                    $tick = $isSelected ? '<div style="text-align: center; margin-top: 4px;"><span style="font-size: 16px; color: #28a745;">✓</span></div>' : '';
-                    $html .= '<div style="text-align: center;">';
-                    $html .= '<div style="border: 1px solid #333; padding: 4px 8px; min-width: 60px; text-align: center;">' . ucfirst($option) . '</div>';
-                    $html .= $tick;
-                    $html .= '</div>';
-                }
-                $html .= '</div></td></tr></table>';
-                return $html;
-            }
-            
             if ($key === 'keadaan') {
                 $options = ['sangat baik', 'baik', 'sederhana', 'tidak baik'];
                 $html = '<table style="width: 100%; border-collapse: collapse;">';
@@ -503,10 +470,12 @@ if (basename($_SERVER['PHP_SELF']) !== 'display_example_b1.php') {
                 return $html;
             }
             
-            // Handle other boolean values for specific fields
-            $booleanFields = ['ada_pertikaian', 'bersetuju'];
+            // Handle specific fields that need table layout despite being boolean/enum
+            // 'bersetuju' is kept here to preserve the table layout when it's False (or in non-B1 forms)
+            // 'ada_pertikaian' is removed so it falls through to generic boolean handler
+            $specificTableFields = ['bersetuju'];
             
-            if (in_array($key, $booleanFields)) {
+            if (in_array($key, $specificTableFields)) {
                 $options = ['ya', 'tidak'];
                 $html = '<table style="width: 100%; border-collapse: collapse;">';
                 $html .= '<tr><td style="border: 1px solid #333; padding: 4px 8px; text-align: center; font-weight: bold; background-color: #f0f0f0;">' . ucwords(str_replace('_', ' ', $key)) . '</td></tr>';
@@ -522,6 +491,11 @@ if (basename($_SERVER['PHP_SELF']) !== 'display_example_b1.php') {
                 }
                 $html .= '</div></td></tr></table>';
                 return $html;
+            }
+
+            // Generic boolean handler for all other boolean fields (including berbuah, penjagaan, ada_pertikaian)
+            if (is_bool($value)) {
+                return $value ? 'YA' : 'TIDAK';
             }
             
             // Handle empty values
@@ -582,7 +556,7 @@ if (basename($_SERVER['PHP_SELF']) !== 'display_example_b1.php') {
                 echo '<div class="form-section">';
                 echo '<div style="font-weight:bold; background:#ccc; padding:4px 8px; border-bottom:1px solid #333;">3(i) KEBUN I';
                 if ($isTidakBerkaitan) {
-                    echo ' <span style="color: #dc2626; font-weight: 700; margin-left: 10px;">[TIDAK BERKAITAN]</span>';
+                    echo ' <span style="color: #dc2626; font-weight: 700; margin-left: 10px;">[TIDAK BERKENAAN]</span>';
                 }
                 echo '</div>';
                 if (!$isTidakBerkaitan) {
@@ -591,34 +565,46 @@ if (basename($_SERVER['PHP_SELF']) !== 'display_example_b1.php') {
                     echo '<td rowspan="2">Jenis Kebun</td>';
                     echo '<td rowspan="2">Anggaran Keluasan<br>(Hektar)</td>';
                     echo '<td rowspan="2">Umur<br>(Tahun)</td>';
-                    echo '<td colspan="2">Berbuah</td>';
+                    echo '<td rowspan="2">Berbuah</td>';
                     echo '<td colspan="4">Keadaan</td>';
-                    echo '<td colspan="2">Penjagaan</td>';
+                    echo '<td rowspan="2">Penjagaan</td>';
                     echo '<td rowspan="2">Catatan Am</td>';
                     echo '</tr>';
                     echo '<tr style="background:#eee; font-weight:bold;">';
-                    echo '<td>Sudah</td><td>Belum</td>';
+                    // echo '<td>Sudah</td><td>Belum</td>'; // Specific cols removed
                     echo '<td>Sangat Baik</td><td>Baik</td><td>Sederhana</td><td>Tidak Baik</td>';
-                    echo '<td>Ya</td><td>Tidak</td>';
+                    // echo '<td>Ya</td><td>Tidak</td>'; // Specific cols removed
                     echo '</tr>';
                     echo '<tr>';
                     echo '<td>' . htmlspecialchars($kebun['jenis_kebun'] ?? '') . '</td>';
                     echo '<td>' . htmlspecialchars($kebun['anggaran_keluasan'] ?? '') . '</td>';
                     echo '<td>' . htmlspecialchars($kebun['umur'] ?? '') . '</td>';
-                    echo '<td>' . (($kebun['berbuah'] === true || $kebun['berbuah'] === 'true' || $kebun['berbuah'] === 1) ? '✓' : '') . '</td>';
-                    echo '<td>' . (($kebun['berbuah'] === false || $kebun['berbuah'] === 'false' || $kebun['berbuah'] === 0) ? '✓' : '') . '</td>';
+                    
+                    // Berbuah Logic
+                    $bVal = $kebun['berbuah'] ?? null;
+                    $bText = '';
+                    if ($bVal === true || $bVal === 'true' || $bVal === 1) $bText = 'YA';
+                    elseif ($bVal === false || $bVal === 'false' || $bVal === 0) $bText = 'TIDAK';
+                    echo '<td>' . $bText . '</td>';
+                    
                     $keadaanOpts = ['sangat baik', 'baik', 'sederhana', 'tidak baik'];
                     foreach ($keadaanOpts as $opt) {
                         echo '<td>' . (strtolower($kebun['keadaan'] ?? '') === $opt ? '✓' : '') . '</td>';
                     }
-                    echo '<td>' . (($kebun['penjagaan'] === true || $kebun['penjagaan'] === 'true' || $kebun['penjagaan'] === 1) ? '✓' : '') . '</td>';
-                    echo '<td>' . (($kebun['penjagaan'] === false || $kebun['penjagaan'] === 'false' || $kebun['penjagaan'] === 0) ? '✓' : '') . '</td>';
+                    
+                    // Penjagaan Logic
+                    $pVal = $kebun['penjagaan'] ?? null;
+                    $pText = '';
+                    if ($pVal === true || $pVal === 'true' || $pVal === 1) $pText = 'YA';
+                    elseif ($pVal === false || $pVal === 'false' || $pVal === 0) $pText = 'TIDAK';
+                    echo '<td>' . $pText . '</td>';
+                    
                     echo '<td>' . htmlspecialchars($kebun['catatan'] ?? '') . '</td>';
                     echo '</tr>';
                     // Faktor Penilaian row (new)
                     if (isset($formData['faktor_penilaian'])) {
                         $fp = $formData['faktor_penilaian'];
-                        echo '<tr><td colspan="12" style="text-align:left;">Faktor Penilaian: ';
+                        echo '<tr><td colspan="10" style="text-align:left;">Faktor Penilaian: ';
                         $fpParts = [];
                         $fpParts[] = 'Berbuah: ' . (($fp['berbuah'] ?? false) ? '✓' : '✗');
                         $fpParts[] = 'Keadaan: ' . htmlspecialchars($fp['keadaan'] ?? '');
@@ -626,7 +612,7 @@ if (basename($_SERVER['PHP_SELF']) !== 'display_example_b1.php') {
                         echo implode(' | ', $fpParts);
                         echo '</td></tr>';
                     } else {
-                        echo '<tr><td colspan="12" style="text-align:left;">Faktor Penilaian</td></tr>';
+                        echo '<tr><td colspan="10" style="text-align:left;">Faktor Penilaian</td></tr>';
                     }
                     echo '</table>';
                     echo '<div style="font-size:11px; margin-top:2px;">Nota : Gunakan para 3(i) jika terdapat lebih dari sebuah kebun dalam Flt. atau Lot diatas.</div>';
@@ -639,7 +625,7 @@ if (basename($_SERVER['PHP_SELF']) !== 'display_example_b1.php') {
                 echo '<div class="form-section">';
                 echo '<div style="font-weight:bold; background:#ccc; padding:4px 8px; border-bottom:1px solid #333;">4. TANAMAN-TANAMAN LAIN';
                 if ($isTidakBerkaitan) {
-                    echo ' <span style="color: #dc2626; font-weight: 700; margin-left: 10px;">[TIDAK BERKAITAN]</span>';
+                    echo ' <span style="color: #dc2626; font-weight: 700; margin-left: 10px;">[TIDAK BERKENAAN]</span>';
                 }
                 echo '</div>';
                 if (!$isTidakBerkaitan) {
@@ -648,15 +634,15 @@ if (basename($_SERVER['PHP_SELF']) !== 'display_example_b1.php') {
                     echo '<td rowspan="2">Jenis Tanaman</td>';
                     echo '<td rowspan="2">Bilangan Ditanam</td>';
                     echo '<td rowspan="2">Umur<br>(Tahun)</td>';
-                    echo '<td colspan="2">Berbuah</td>';
+                    echo '<td rowspan="2">Berbuah</td>';
                     echo '<td colspan="4">Keadaan</td>';
-                    echo '<td colspan="2">Penjagaan</td>';
+                    echo '<td rowspan="2">Penjagaan</td>';
                     echo '<td rowspan="2">Catatan Am</td>';
                     echo '</tr>';
                     echo '<tr style="background:#eee; font-weight:bold;">';
-                    echo '<td>Ya</td><td>Belum</td>';
+                    // echo '<td>Ya</td><td>Belum</td>';
                     echo '<td>Sangat Baik</td><td>Baik</td><td>Sederhana</td><td>Tidak Baik</td>';
-                    echo '<td>Ya</td><td>Tidak</td>';
+                    // echo '<td>Ya</td><td>Tidak</td>';
                     echo '</tr>';
                     $keadaanOpts = ['sangat baik', 'baik', 'sederhana', 'tidak baik'];
                     foreach ($formData['tanaman_lain'] as $tanaman) {
@@ -664,19 +650,31 @@ if (basename($_SERVER['PHP_SELF']) !== 'display_example_b1.php') {
                         echo '<td>' . htmlspecialchars($tanaman['jenis_tanaman'] ?? '') . '</td>';
                         echo '<td>' . htmlspecialchars($tanaman['bilangan_ditanam'] ?? '') . '</td>';
                         echo '<td>' . htmlspecialchars($tanaman['umur'] ?? '') . '</td>';
-                        echo '<td>' . (($tanaman['berbuah'] === true || $tanaman['berbuah'] === 'true' || $tanaman['berbuah'] === 1) ? '✓' : '') . '</td>';
-                        echo '<td>' . (($tanaman['berbuah'] === false || $tanaman['berbuah'] === 'false' || $tanaman['berbuah'] === 0) ? '✓' : '') . '</td>';
+                        
+                        // Berbuah
+                        $bVal = $tanaman['berbuah'] ?? null;
+                        $bText = '';
+                        if ($bVal === true || $bVal === 'true' || $bVal === 1) $bText = 'YA';
+                        elseif ($bVal === false || $bVal === 'false' || $bVal === 0) $bText = 'TIDAK';
+                        echo '<td>' . $bText . '</td>';
+                        
                         foreach ($keadaanOpts as $opt) {
                             echo '<td>' . (strtolower($tanaman['keadaan'] ?? '') === $opt ? '✓' : '') . '</td>';
                         }
-                        echo '<td>' . (($tanaman['penjagaan'] === true || $tanaman['penjagaan'] === 'true' || $tanaman['penjagaan'] === 1) ? '✓' : '') . '</td>';
-                        echo '<td>' . (($tanaman['penjagaan'] === false || $tanaman['penjagaan'] === 'false' || $tanaman['penjagaan'] === 0) ? '✓' : '') . '</td>';
+                        
+                        // Penjagaan
+                        $pVal = $tanaman['penjagaan'] ?? null;
+                        $pText = '';
+                        if ($pVal === true || $pVal === 'true' || $pVal === 1) $pText = 'YA';
+                        elseif ($pVal === false || $pVal === 'false' || $pVal === 0) $pText = 'TIDAK';
+                        echo '<td>' . $pText . '</td>';
+                        
                         echo '<td>' . htmlspecialchars($tanaman['catatan'] ?? '') . '</td>';
                         echo '</tr>';
                     }
                     for ($i = 0; $i < 8; $i++) {
                         echo '<tr>';
-                        for ($j = 0; $j < 11; $j++) echo '<td>&nbsp;</td>';
+                        for ($j = 0; $j < 10; $j++) echo '<td>&nbsp;</td>';
                         echo '</tr>';
                     }
                     echo '</table>';
@@ -698,7 +696,39 @@ if (basename($_SERVER['PHP_SELF']) !== 'display_example_b1.php') {
             }
             // 6. Pengesahan Penuntut
             if (isset($formData['pengesahan_penuntut'])) {
-                renderFormSection($formData['pengesahan_penuntut'], 'Pengesahan Penuntut', [], $tidakBerkaitanSections, 'pengesahan_penuntut');
+                $ppData = $formData['pengesahan_penuntut'];
+                // Check if 'bersetuju' is true
+                if (isset($ppData['bersetuju']) && ($ppData['bersetuju'] === true || $ppData['bersetuju'] === 'true')) {
+                    $sectionTitle = 'Pengesahan Penuntut';
+                    $isTidakBerkaitan = in_array($sectionTitle, $tidakBerkaitanSections) || in_array('pengesahan_penuntut', $tidakBerkaitanSections);
+                    
+                    echo "<div class='form-section'>";
+                    echo "<div class='section-title'>" . htmlspecialchars($sectionTitle);
+                    if ($isTidakBerkaitan) {
+                        echo " <span style='color: #dc2626; font-weight: 700; margin-left: 10px;'>[TIDAK BERKENAAN]</span>";
+                    }
+                    echo "</div>";
+                    
+                    if (!$isTidakBerkaitan) {
+                        echo "<table class='form-table'>";
+                        foreach ($ppData as $key => $value) {
+                            if ($key === 'bersetuju') {
+                                echo "<tr>";
+                                echo "<td colspan='2' class='form-value' style='padding: 1rem; font-style: italic;'>saya bersetuju dengan penghitungan dan laporan seperti tersebut diatas</td>";
+                                echo "</tr>";
+                            } else {
+                                echo "<tr>";
+                                echo "<td class='form-label'>" . htmlspecialchars(ucwords(str_replace('_', ' ', $key))) . ":</td>";
+                                echo "<td class='form-value'>" . formatFormValue($value, $key) . "</td>";
+                                echo "</tr>";
+                            }
+                        }
+                        echo "</table>";
+                    }
+                    echo "</div>";
+                } else {
+                    renderFormSection($formData['pengesahan_penuntut'], 'Pengesahan Penuntut', [], $tidakBerkaitanSections, 'pengesahan_penuntut');
+                }
             }
             // 7. Pengesahan Pengukur
             if (isset($formData['pengesahan_pengukur'])) {
@@ -707,6 +737,11 @@ if (basename($_SERVER['PHP_SELF']) !== 'display_example_b1.php') {
             // 8. Pengesahan (for signatures and stamps)
             if (isset($formData['pengesahan'])) {
                 renderFormSection($formData['pengesahan'], 'Pengesahan', [], $tidakBerkaitanSections, 'pengesahan');
+            }
+            
+            // Render Proof Signature (Admin Only)
+            if (isset($formData['proof_signature']) && isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in']) {
+                renderFormSection($formData['proof_signature'], 'Proof Signature', [], $tidakBerkaitanSections, 'proof_signature');
             }
         } else if (($formData['form_id'] ?? '') === 'C1') {
             // Render Tanah
@@ -723,7 +758,7 @@ if (basename($_SERVER['PHP_SELF']) !== 'display_example_b1.php') {
                 echo '<div class="form-section">';
                 echo '<div style="font-weight:bold; background:#ccc; padding:4px 8px; border-bottom:1px solid #333;">KOLAM IKAN';
                 if ($isTidakBerkaitan) {
-                    echo ' <span style="color: #dc2626; font-weight: 700; margin-left: 10px;">[TIDAK BERKAITAN]</span>';
+                    echo ' <span style="color: #dc2626; font-weight: 700; margin-left: 10px;">[TIDAK BERKENAAN]</span>';
                 }
                 echo '</div>';
                 if (!$isTidakBerkaitan) {
@@ -758,7 +793,7 @@ if (basename($_SERVER['PHP_SELF']) !== 'display_example_b1.php') {
                 echo '<div class="form-section">';
                 echo '<div style="font-weight:bold; background:#ccc; padding:4px 8px; border-bottom:1px solid #333;">BANGUNAN';
                 if ($isTidakBerkaitan) {
-                    echo ' <span style="color: #dc2626; font-weight: 700; margin-left: 10px;">[TIDAK BERKAITAN]</span>';
+                    echo ' <span style="color: #dc2626; font-weight: 700; margin-left: 10px;">[TIDAK BERKENAAN]</span>';
                 }
                 echo '</div>';
                 if (!$isTidakBerkaitan) {
@@ -814,6 +849,11 @@ if (basename($_SERVER['PHP_SELF']) !== 'display_example_b1.php') {
             if (isset($formData['pengesahan'])) {
                 renderFormSection($formData['pengesahan'], 'Pengesahan', [], $tidakBerkaitanSections, 'pengesahan');
             }
+
+            // Render Proof Signature (Admin Only)
+            if (isset($formData['proof_signature']) && isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in']) {
+                renderFormSection($formData['proof_signature'], 'Proof Signature', [], $tidakBerkaitanSections, 'proof_signature');
+            }
         } else {
             // Generic rendering for other forms
             $excludeKeys = ['form', 'form_id', 'created_at', 'instance_id', 'form_type', 'tidak_berkaitan_sections'];
@@ -823,6 +863,11 @@ if (basename($_SERVER['PHP_SELF']) !== 'display_example_b1.php') {
             }
             // Render other sections
             foreach ($formData as $section => $data) {
+                // Restrict Proof Signature to Admin Only
+                if ($section === 'proof_signature' && (!isset($_SESSION['admin_logged_in']) || !$_SESSION['admin_logged_in'])) {
+                    continue;
+                }
+
                 if (!in_array($section, $excludeKeys) && $section !== 'tanah' && is_array($data)) {
                     $sectionTitle = ucwords(str_replace('_', ' ', $section));
                     renderFormSection($data, $sectionTitle, [], $tidakBerkaitanSections, $section);
